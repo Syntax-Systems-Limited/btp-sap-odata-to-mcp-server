@@ -1,4 +1,4 @@
-# S/4HANA MCP Server 🚀
+# SAP OData to MCP Server for BTP🚀
 
 ## 🎯 **Project Goal**
 
