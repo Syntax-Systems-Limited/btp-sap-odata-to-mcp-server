@@ -247,6 +247,12 @@ GET /docs
 }
 ```
 
+## 🎬 Demo
+
+See the MCP server in action:
+
+![MCP Demo](docs/img/MCP%20Demo.gif)
+
 ## ⚡ Quick Start
 
 - For local development and testing, see [LOCAL_RUN.md](./docs/LOCAL_RUN.md)
