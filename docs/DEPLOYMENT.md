@@ -38,6 +38,7 @@ You must create a destination in SAP BTP to connect to your on-premise SAP syste
 - **Name:** SAP_SYSTEM (or your custom name)
 - **Type:** HTTP
 - **Authentication:** BasicAuthentication
+- **Proxy Type:** OnPremise
 - **User:** [your_sap_username]
 - **Password:** [your_sap_password]
 - **URL:** https://[virtual-hostname]:[port] (as configured in SAP Cloud Connector)
