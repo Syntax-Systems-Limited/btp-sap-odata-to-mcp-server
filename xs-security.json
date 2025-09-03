@@ -1,0 +1,14 @@
+{
+  "xsappname": "btp-sap-odata-to-mcp-server",
+  "tenant-mode": "dedicated",
+  "description": "BTP SAP OData MCP Server Security Configuration",
+  "scopes": [
+  ],
+  "role-templates": [
+  ],
+  "oauth2-configuration": {
+    "redirect-uris": [
+      "https://*.cfapps.*.hana.ondemand.com/**"
+    ]
+  }
+}

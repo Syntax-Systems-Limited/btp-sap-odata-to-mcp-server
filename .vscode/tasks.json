@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"label": "npm run build",
+			"script": "build",
+			"group": "build",
+			"problemMatcher": [],
+			"detail": "tsc && chmod +x dist/index.js"
+		}
+	]
+}

@@ -1,0 +1,6 @@
+/node_modules/
+/dist/
+/build/
+.env
+mta_archives/
+default-env.json
