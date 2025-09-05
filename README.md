@@ -166,18 +166,6 @@ Examples:
 - ✅ **Session Management** for HTTP transport
 - ✅ **Error Handling** with proper error codes
 
-### **Protocol Version**
-
-2025-06-18
-
-### **Supported Capabilities**
-
-- ✅ **Tools** with `listChanged` notifications
-- ✅ **Resources** with `listChanged` notifications
-- ✅ **Logging** with level control
-- ✅ **Session Management** for HTTP transport
-- ✅ **Error Handling** with proper error codes
-
 ### **Transport Support**
 
 - ✅ **Streamable HTTP** (recommended)
