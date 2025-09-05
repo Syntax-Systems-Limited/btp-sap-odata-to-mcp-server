@@ -253,6 +253,16 @@ See the MCP server in action:
 
 ![MCP Demo](docs/img/MCP%20Demo.gif)
 
+
+## ⚙️ Environment Variable: Disable ReadEntity Tool Registration
+
+To disable registration of the ReadEntity tool for all entities in all services, set the following in your `.env` file:
+
+```env
+DISABLE_READ_ENTITY_TOOL=true
+```
+This will prevent registration of the ReadEntity tool for all entities and services.
+
 ## ⚡ Quick Start
 
 - For local development and testing, see [LOCAL_RUN.md](./docs/LOCAL_RUN.md)
