@@ -1,3 +1,4 @@
+import { HierarchicalSAPToolRegistry } from './tools/hierarchical-tool-registry.js';
 import { SAPToolRegistry } from './tools/sap-tool-registry.js';
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
@@ -8,15 +9,16 @@ import { DestinationService } from './services/destination-service.js';
 import { SAPClient } from './services/sap-client.js';
 import { Logger } from './utils/logger.js';
 import { Config } from './utils/config.js';
+
 import { ErrorHandler } from './utils/error-handler.js';
 import { ODataService } from './types/sap-types.js';
 
 export class MCPServer {
-    private mcpServer: McpServer;
-    private sapClient: SAPClient;
     private logger: Logger;
-    private discoveredServices: ODataService[] = [];
-    private toolRegistry: SAPToolRegistry;
+    private sapClient: SAPClient;
+    private discoveredServices: ODataService[];
+    private mcpServer: McpServer;
+    private toolRegistry: HierarchicalSAPToolRegistry | SAPToolRegistry;
 
     constructor(discoveredServices: ODataService[]) {
         this.logger = new Logger('mcp-server');
@@ -32,13 +34,30 @@ export class MCPServer {
             this.logger.error('MCP Server Error:', error);
             ErrorHandler.handle(error);
         };
-        this.toolRegistry = new SAPToolRegistry(this.mcpServer, this.sapClient, this.logger, this.discoveredServices);
+
+        // Choose registry type based on env variable
+        const registryType = process.env.MCP_TOOL_REGISTRY_TYPE || 'hierarchical';
+        if (registryType === 'flat') {
+            this.toolRegistry = new SAPToolRegistry(this.mcpServer, this.sapClient, this.logger, this.discoveredServices);
+            this.logger.info('Using SAPToolRegistry (flat) for MCP tool exposure');
+        } else {
+            this.toolRegistry = new HierarchicalSAPToolRegistry(this.mcpServer, this.sapClient, this.logger, this.discoveredServices);
+            this.logger.info('Using HierarchicalSAPToolRegistry for MCP tool exposure');
+        }
     }
 
     async initialize(): Promise<void> {
         try {
-            this.toolRegistry.registerServiceMetadataResources();
-            await this.toolRegistry.registerServiceCRUDTools();
+            // Check which registry type we're using
+            if (this.toolRegistry instanceof HierarchicalSAPToolRegistry) {
+                // HierarchicalSAPToolRegistry has both methods
+                this.toolRegistry.registerServiceMetadataResources();
+                await this.toolRegistry.registerDiscoveryTools();
+            } else if (this.toolRegistry instanceof SAPToolRegistry) {
+                // SAPToolRegistry has different methods
+                this.toolRegistry.registerServiceMetadataResources();
+                await this.toolRegistry.registerServiceCRUDTools();
+            }
             this.logger.info('🔧 Registered MCP tools for SAP operations');
         } catch (error) {
             this.logger.error('❌ Failed to initialize server:', error);
