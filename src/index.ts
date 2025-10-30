@@ -14,7 +14,7 @@ import { SAPClient } from './services/sap-client.js';
 import { SAPDiscoveryService } from './services/sap-discovery.js';
 import { ODataService } from './types/sap-types.js';
 import { ServiceDiscoveryConfigService } from './services/service-discovery-config.js';
-import { AuthService, AuthRequest } from './services/auth-service.js';
+import { AuthService, AuthRequest } from './syntax/auth-service.js'; // SYNTAX OVERRIDE
 
 // Global type extensions
 declare global {
@@ -211,10 +211,10 @@ export function createApp(): express.Application {
                 logging: {}
             },
             features: [
-                'OAuth authentication with SAP XSUAA',
+                // 'OAuth authentication with SAP XSUAA',
                 'Dynamic SAP OData service discovery',
                 'CRUD operations for all discovered entities',
-                'JWT token forwarding for secure operations',
+                // 'JWT token forwarding for secure operations',
                 'Dual destination support (discovery vs execution)',
                 'Natural language query support',
                 'Session-based HTTP transport',
@@ -247,11 +247,11 @@ export function createApp(): express.Application {
             },
             userGuidance: {
                 gettingStarted: [
-                    '1. Authenticate: Navigate to /oauth/authorize to get your access token',
-                    '2. Connect: Use the token in Authorization header for MCP requests',
-                    '3. Discover: Start with search-sap-services to find available SAP services',
-                    '4. Explore: Use discover-service-entities to see what data is available',
-                    '5. Execute: Use execute-entity-operation to read, create, update, or delete data'
+                    // '1. Authenticate: Navigate to /oauth/authorize to get your access token',
+                    // '2. Connect: Use the token in Authorization header for MCP requests',
+                    '1. Discover: Start with search-sap-services to find available SAP services',
+                    '2. Explore: Use discover-service-entities to see what data is available',
+                    '3. Execute: Use execute-entity-operation to read, create, update, or delete data'
                 ],
                 availableOperations: [
                     'Search and filter SAP OData services by category or keyword',
@@ -267,14 +267,14 @@ export function createApp(): express.Application {
                     'Use discover-service-entities before attempting CRUD operations',
                     'Check entity capabilities (creatable, updatable, deletable) before operations',
                     'Use OData query options to filter and limit data retrieval',
-                    'JWT tokens expire - refresh when needed via /oauth/refresh'
+                    // 'JWT tokens expire - refresh when needed via /oauth/refresh'
                 ]
             },
             endpoints: {
                 health: '/health',
                 mcp: '/mcp',
-                auth: '/oauth/authorize',
-                userinfo: '/oauth/userinfo',
+                // auth: '/oauth/authorize',
+                // userinfo: '/oauth/userinfo',
                 docs: '/docs'
             },
             activeSessions: sessions.size,

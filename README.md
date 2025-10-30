@@ -1,5 +1,16 @@
 # SAP OData to MCP Server for BTP🚀
 
+
+## SYNTAX SPECIFIC CHANGES
+
+### Authorization via plain client credentials (not OAuth)
+
+OAuth authentication is disabled.
+The API Key must be configured in environment variable `MCP_API_KEY`.
+
+
+----------
+
 ## 🎯 **Project Goal**
 
 Transform your SAP S/4HANA or ECC system into a **conversational AI interface** by exposing all OData services as dynamic MCP tools. This enables natural language interactions with your ERP data:
